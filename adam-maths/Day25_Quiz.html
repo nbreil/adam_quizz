@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 25 Trigonometry Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .question {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .question h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .options {
+            margin: 10px 0;
+        }
+        input[type="radio"], input[type="text"] {
+            margin-right: 8px;
+        }
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+        input[type="text"] {
+            padding: 8px;
+            width: 200px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            display: none;
+        }
+        .feedback.show {
+            display: block;
+        }
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .score {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Day 25: Trigonometric Equations Quiz</h1>
+    <div class="quiz-container">
+        <form id="quizForm">
+            <!-- Question 1 -->
+            <div class="question">
+                <h3>1. What is the amplitude of a sinusoidal function that oscillates between -3 and 5?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="4"> 4</label>
+                    <label><input type="radio" name="q1" value="8"> 8</label>
+                    <label><input type="radio" name="q1" value="1"> 1</label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <h3>2. If a function has a maximum of 10 and a minimum of 4, what is the midline (k)?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="7"> 7</label>
+                    <label><input type="radio" name="q2" value="6"> 6</label>
+                    <label><input type="radio" name="q2" value="3"> 3</label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <h3>3. A sine function completes one full cycle in 8 seconds. What is the period?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="8"> 8</label>
+                    <label><input type="radio" name="q3" value="4"> 4</label>
+                    <label><input type="radio" name="q3" value="16"> 16</label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question">
+                <h3>4. If the period p = 12, what is the frequency b (in terms of π)?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="2π/12"> 2π/12 (or π/6)</label>
+                    <label><input type="radio" name="q4" value="12/2π"> 12/(2π)</label>
+                    <label><input type="radio" name="q4" value="π/12"> π/12</label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question">
+                <h3>5. A Ferris wheel has a diameter of 100 feet. What is the amplitude?</h3>
+                <input type="text" name="q5" placeholder="Answer">
+            </div>
+
+            <!-- Question 6 -->
+            <div class="question">
+                <h3>6. For the Ferris wheel problem, if the lowest point is 5 feet below ground, what is the midline?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="50"> 50 feet</label>
+                    <label><input type="radio" name="q6" value="55"> 55 feet</label>
+                    <label><input type="radio" name="q6" value="45"> 45 feet</label>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="question">
+                <h3>7. Which of these is a sine equation for a function with a=2, k=0, period=2π?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="y=2sin(x)"> y = 2sin(x)</label>
+                    <label><input type="radio" name="q7" value="y=sin(2x)"> y = sin(2x)</label>
+                    <label><input type="radio" name="q7" value="y=2sin(2x)"> y = 2sin(2x)</label>
+                </div>
+            </div>
+
+            <!-- Question 8 -->
+            <div class="question">
+                <h3>8. If a cosine function is shifted right by 3 units, what is the phase shift (h)?</h3>
+                <input type="text" name="q8" placeholder="Answer">
+            </div>
+
+            <!-- Question 9 -->
+            <div class="question">
+                <h3>9. A periodic function has period 365 days (like daylight hours). What is the frequency b?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="2π/365"> 2π/365</label>
+                    <label><input type="radio" name="q9" value="365/2π"> 365/(2π)</label>
+                    <label><input type="radio" name="q9" value="2π·365"> 2π·365</label>
+                </div>
+            </div>
+
+            <!-- Question 10 -->
+            <div class="question">
+                <h3>10. What is the main difference between sine and cosine equations for the same graph?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="amplitude"> Amplitude is different</label>
+                    <label><input type="radio" name="q10" value="phase"> Phase shift (h) is different</label>
+                    <label><input type="radio" name="q10" value="period"> Period is different</label>
+                </div>
+            </div>
+
+            <button type="button" onclick="checkAnswers()">Check Answers</button>
+        </form>
+
+        <div id="feedback" class="feedback"></div>
+        <div id="score" class="score"></div>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            const answers = {
+                q1: '4',
+                q2: '7',
+                q3: '8',
+                q4: '2π/12',
+                q5: '50',
+                q6: '55',
+                q7: 'y=2sin(x)',
+                q8: '3',
+                q9: '2π/365',
+                q10: 'phase'
+            };
+
+            let score = 0;
+            let feedback = '<h3>Results:</h3>';
+            let allAnswered = true;
+
+            for (let q = 1; q <= 10; q++) {
+                const name = 'q' + q;
+                let userAnswer;
+
+                if (name === 'q5' || name === 'q8') {
+                    userAnswer = document.querySelector(`input[name="${name}"]`).value.trim();
+                } else {
+                    const selected = document.querySelector(`input[name="${name}"]:checked`);
+                    userAnswer = selected ? selected.value : '';
+                }
+
+                if (!userAnswer) {
+                    allAnswered = false;
+                    feedback += `<p><strong>Q${q}:</strong> Not answered</p>`;
+                    continue;
+                }
+
+                const isCorrect = userAnswer === answers[name];
+                if (isCorrect) {
+                    score++;
+                    feedback += `<p><strong>Q${q}:</strong> <span style="color: green;">✓ Correct</span></p>`;
+                } else {
+                    feedback += `<p><strong>Q${q}:</strong> <span style="color: red;">✗ Incorrect</span> (Your answer: ${userAnswer}, Correct: ${answers[name]})</p>`;
+                }
+            }
+
+            const feedbackDiv = document.getElementById('feedback');
+            const scoreDiv = document.getElementById('score');
+
+            if (allAnswered) {
+                feedbackDiv.innerHTML = feedback;
+                feedbackDiv.className = 'feedback show';
+                scoreDiv.innerHTML = `Score: ${score}/10 (${Math.round(score/10*100)}%)`;
+            } else {
+                alert('Please answer all questions before submitting!');
+            }
+        }
+    </script>
+</body>
+</html>
