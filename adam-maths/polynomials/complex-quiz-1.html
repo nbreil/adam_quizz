@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complex Roots Quiz 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep:   #060b18;
+      --navy-dark:   #0a1020;
+      --navy-mid:    #0f1830;
+      --navy-card:   #111c35;
+      --navy-border: #1e2d4a;
+      --gold:        #c9a84c;
+      --gold-light:  #e2c46e;
+      --text:        #ddd8cc;
+      --text-bright: #f0ead8;
+      --text-muted:  #5a7099;
+      --text-soft:   #8899bb;
+      --green:       #2ecc8a;
+      --red:         #e05555;
+      --mono:        'IBM Plex Mono', monospace;
+      --sans:        'IBM Plex Sans', sans-serif;
+      --serif:       'Playfair Display', Georgia, serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--navy-deep);
+      color: var(--text);
+      padding: 20px;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .breadcrumb {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .breadcrumb a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: 32px;
+      color: var(--text-bright);
+      margin-bottom: 8px;
+    }
+
+    .quiz-meta {
+      font-size: 14px;
+      color: var(--text-soft);
+      display: flex;
+      gap: 20px;
+    }
+
+    .question-set {
+      display: none;
+    }
+
+    .question-set.active {
+      display: block;
+      animation: fadeIn .3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .question-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .question-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--text-bright);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .math-expr {
+      font-family: var(--mono);
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .option {
+      background: var(--navy-card);
+      border: 2px solid var(--navy-border);
+      padding: 16px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 14px;
+    }
+
+    .option:hover {
+      border-color: var(--gold);
+      background: var(--navy-mid);
+    }
+
+    .option input {
+      margin-right: 12px;
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+    }
+
+    .option label {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .option input[type="radio"]:checked + label {
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    .option.correct {
+      background: rgba(46, 204, 138, 0.1);
+      border-color: var(--green);
+    }
+
+    .option.incorrect {
+      background: rgba(224, 85, 85, 0.1);
+      border-color: var(--red);
+    }
+
+    .feedback {
+      padding: 14px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: rgba(46, 204, 138, 0.1);
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+
+    .feedback.incorrect {
+      background: rgba(224, 85, 85, 0.1);
+      color: var(--red);
+      border: 1px solid var(--red);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 4px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .btn-submit {
+      background: var(--gold);
+      color: var(--navy-deep);
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .btn-submit:hover {
+      background: var(--gold-light);
+    }
+
+    .progress-bar {
+      background: var(--navy-border);
+      height: 4px;
+      border-radius: 2px;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--gold);
+      height: 100%;
+      width: 20%;
+      transition: width .3s;
+    }
+
+    .results {
+      display: none;
+    }
+
+    .results.show {
+      display: block;
+    }
+
+    .results-content {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      padding: 40px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .score-big {
+      font-family: var(--serif);
+      font-size: 64px;
+      color: var(--gold-light);
+      margin: 20px 0;
+      font-weight: 700;
+    }
+
+    .results-text {
+      font-size: 16px;
+      color: var(--text-soft);
+      margin-bottom: 30px;
+    }
+
+    .btn-restart {
+      background: var(--gold);
+      color: var(--navy-deep);
+      padding: 12px 32px;
+      font-weight: 600;
+    }
+
+    .btn-restart:hover {
+      background: var(--gold-light);
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--gold);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: .06em;
+    }
+
+    .btn-back:hover {
+      color: var(--gold-light);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quiz-container">
+    <div class="header">
+      <div class="breadcrumb">
+        <a href="quizzes.html">← Quizzes</a> / Complex Quiz 1
+      </div>
+      <h1>Complex Numbers Basics</h1>
+      <div class="quiz-meta">
+        <span id="current-q">Question 1</span>
+        <span id="total-q">of 5</span>
+      </div>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+
+    <form id="quiz-form">
+      <!-- Q1 -->
+      <div class="question-set active" id="q1">
+        <div class="question-num">Question 1 of 5</div>
+        <div class="question-text">Compute: <span class="math-expr">(2 + 3i) + (4 - 5i)</span></div>
+        <div class="options">
+          <div class="option">
+            <input type="radio" id="q1a" name="q1" value="6 - 2i">
+            <label for="q1a">6 - 2i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q1b" name="q1" value="6 + 2i">
+            <label for="q1b">6 + 2i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q1c" name="q1" value="6 - 8i">
+            <label for="q1c">6 - 8i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q1d" name="q1" value="2 - 2i">
+            <label for="q1d">2 - 2i</label>
+          </div>
+        </div>
+        <div class="feedback" id="f1"></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="question-set" id="q2">
+        <div class="question-num">Question 2 of 5</div>
+        <div class="question-text">Compute: <span class="math-expr">(3 - 2i)(1 + 4i)</span></div>
+        <div class="options">
+          <div class="option">
+            <input type="radio" id="q2a" name="q2" value="11 + 10i">
+            <label for="q2a">11 + 10i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q2b" name="q2" value="3 + 8i">
+            <label for="q2b">3 + 8i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q2c" name="q2" value="-5 + 10i">
+            <label for="q2c">-5 + 10i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q2d" name="q2" value="3 - 8i">
+            <label for="q2d">3 - 8i</label>
+          </div>
+        </div>
+        <div class="feedback" id="f2"></div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="question-set" id="q3">
+        <div class="question-num">Question 3 of 5</div>
+        <div class="question-text">What is <span class="math-expr">i²</span>?</div>
+        <div class="options">
+          <div class="option">
+            <input type="radio" id="q3a" name="q3" value="1">
+            <label for="q3a">1</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q3b" name="q3" value="-1">
+            <label for="q3b">-1</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q3c" name="q3" value="i">
+            <label for="q3c">i</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q3d" name="q3" value="0">
+            <label for="q3d">0</label>
+          </div>
+        </div>
+        <div class="feedback" id="f3"></div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="question-set" id="q4">
+        <div class="question-num">Question 4 of 5</div>
+        <div class="question-text">For the polynomial <span class="math-expr">f(x) = x² + 2</span>, how many real roots does it have?</div>
+        <div class="options">
+          <div class="option">
+            <input type="radio" id="q4a" name="q4" value="0">
+            <label for="q4a">0</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q4b" name="q4" value="1">
+            <label for="q4b">1</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q4c" name="q4" value="2">
+            <label for="q4c">2</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q4d" name="q4" value="Undefined">
+            <label for="q4d">Undefined</label>
+          </div>
+        </div>
+        <div class="feedback" id="f4"></div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="question-set" id="q5">
+        <div class="question-num">Question 5 of 5</div>
+        <div class="question-text">If a polynomial has degree 4, by the Fundamental Theorem of Algebra, how many roots (real or complex) must it have?</div>
+        <div class="options">
+          <div class="option">
+            <input type="radio" id="q5a" name="q5" value="At most 4">
+            <label for="q5a">At most 4</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q5b" name="q5" value="Exactly 4">
+            <label for="q5b">Exactly 4</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q5c" name="q5" value="At least 0">
+            <label for="q5c">At least 0</label>
+          </div>
+          <div class="option">
+            <input type="radio" id="q5d" name="q5" value="Between 0 and 4">
+            <label for="q5d">Between 0 and 4</label>
+          </div>
+        </div>
+        <div class="feedback" id="f5"></div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" class="btn-submit" id="submit-btn" onclick="checkAnswer()">Check Answer</button>
+      </div>
+
+      <div class="results" id="results">
+        <div class="results-content">
+          <div style="font-family: var(--serif); font-size: 20px; color: var(--text-soft);">Your Score</div>
+          <div class="score-big" id="final-score">0/5</div>
+          <div class="results-text" id="results-msg"></div>
+          <button class="btn-restart" onclick="location.reload()">Try Again</button>
+          <a href="quizzes.html" class="btn-back">← Back to Quizzes</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const answers = {
+      q1: '6 - 2i',
+      q2: '11 + 10i',
+      q3: '-1',
+      q4: '0',
+      q5: 'Exactly 4'
+    };
+
+    const explanations = {
+      q1: 'Add real parts: 2 + 4 = 6. Add imaginary parts: 3i + (-5i) = -2i. Result: 6 - 2i',
+      q2: 'FOIL: (3)(1) + (3)(4i) + (-2i)(1) + (-2i)(4i) = 3 + 12i - 2i - 8i² = 3 + 10i - 8(-1) = 11 + 10i',
+      q3: 'By definition, i² = -1. This is the fundamental property of the imaginary unit.',
+      q4: 'The equation x² + 2 = 0 gives x² = -2, which has no real solutions (only complex: ±i√2)',
+      q5: 'The Fundamental Theorem of Algebra states a degree n polynomial has EXACTLY n roots (counting multiplicity and including complex roots).'
+    };
+
+    let currentQ = 1;
+    const totalQ = 5;
+    let score = 0;
+
+    function showQuestion(n) {
+      document.querySelectorAll('.question-set').forEach(q => q.classList.remove('active'));
+      document.getElementById('q' + n).classList.add('active');
+      document.getElementById('current-q').textContent = 'Question ' + n;
+      document.getElementById('progress').style.width = (n / totalQ * 100) + '%';
+    }
+
+    function checkAnswer() {
+      const selected = document.querySelector('input[name="q' + currentQ + '"]:checked');
+      if (!selected) {
+        alert('Please select an answer');
+        return;
+      }
+
+      const isCorrect = selected.value === answers['q' + currentQ];
+      const feedbackEl = document.getElementById('f' + currentQ);
+      const parent = selected.closest('.option');
+
+      if (isCorrect) {
+        score++;
+        feedbackEl.textContent = '✓ Correct! ' + explanations['q' + currentQ];
+        feedbackEl.className = 'feedback show correct';
+        parent.classList.add('correct');
+      } else {
+        feedbackEl.textContent = '✗ Incorrect. ' + explanations['q' + currentQ];
+        feedbackEl.className = 'feedback show incorrect';
+        parent.classList.add('incorrect');
+        document.querySelector('input[value="' + answers['q' + currentQ] + '"]').closest('.option').classList.add('correct');
+      }
+
+      const submitBtn = document.getElementById('submit-btn');
+      if (currentQ === totalQ) {
+        submitBtn.textContent = 'See Results';
+        submitBtn.onclick = showResults;
+      } else {
+        submitBtn.textContent = 'Next Question';
+        submitBtn.onclick = () => {
+          currentQ++;
+          showQuestion(currentQ);
+        };
+      }
+    }
+
+    function showResults() {
+      document.getElementById('quiz-form').style.display = 'none';
+      document.getElementById('results').classList.add('show');
+      document.getElementById('final-score').textContent = score + '/' + totalQ;
+
+      let msg = '';
+      if (score === 5) msg = 'Perfect! You understand complex numbers! 🎯';
+      else if (score >= 4) msg = 'Great! You have a solid grasp of complex numbers.';
+      else if (score >= 3) msg = 'Good! Keep practicing operations with complex numbers.';
+      else msg = 'Review complex number basics and try again!';
+      document.getElementById('results-msg').textContent = msg;
+    }
+  </script>
+
+</body>
+</html>

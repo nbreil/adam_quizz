@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Polynomials — Quizzes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep:   #060b18;
+      --navy-dark:   #0a1020;
+      --navy-mid:    #0f1830;
+      --navy-card:   #111c35;
+      --navy-border: #1e2d4a;
+      --navy-hover:  #162440;
+      --gold:        #c9a84c;
+      --gold-light:  #e2c46e;
+      --gold-dim:    #7a6128;
+      --text:        #ddd8cc;
+      --text-bright: #f0ead8;
+      --text-muted:  #5a7099;
+      --text-soft:   #8899bb;
+      --green:       #2ecc8a;
+      --mono:        'IBM Plex Mono', monospace;
+      --sans:        'IBM Plex Sans', sans-serif;
+      --serif:       'Playfair Display', Georgia, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--navy-deep);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .header {
+      background: var(--navy-dark);
+      border-bottom: 1px solid var(--navy-border);
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .breadcrumb {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      margin-bottom: 20px;
+    }
+
+    .breadcrumb a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-soft);
+      max-width: 600px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .quiz-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      padding: 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: background .2s, border-color .2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quiz-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s ease;
+    }
+
+    .quiz-card:hover {
+      background: var(--navy-hover);
+      border-color: var(--gold);
+    }
+
+    .quiz-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .quiz-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 12px;
+    }
+
+    .quiz-card h3 {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 12px;
+    }
+
+    .quiz-card p {
+      font-size: 13px;
+      color: var(--text-soft);
+      flex: 1;
+      margin-bottom: 16px;
+    }
+
+    .quiz-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--navy-border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .quiz-arrow {
+      color: var(--gold);
+      font-family: var(--mono);
+    }
+
+    footer {
+      border-top: 1px solid var(--navy-border);
+      padding: 28px 40px;
+      background: var(--navy-dark);
+      text-align: center;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    @media (max-width: 900px) {
+      .quiz-grid { grid-template-columns: 1fr; }
+      .header { padding: 30px 20px; }
+      .container { padding: 30px 20px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="breadcrumb">
+      <a href="../../index.html">← ADAM</a> / Math / Polynomials
+    </div>
+    <h1>Polynomials Quizzes</h1>
+    <p class="subtitle">Master polynomial division and complex roots through focused practice.</p>
+  </div>
+
+  <div class="container">
+
+    <section>
+      <h2>Polynomial Division</h2>
+      <div class="quiz-grid">
+        <a href="division-quiz-1.html" class="quiz-card">
+          <div class="quiz-tag">Quiz 1</div>
+          <h3>Division Basics</h3>
+          <p>Get started with polynomial division using long division and area models. 5 questions.</p>
+          <div class="quiz-footer">
+            <span>5 questions</span>
+            <span class="quiz-arrow">Start →</span>
+          </div>
+        </a>
+        <a href="division-quiz-2.html" class="quiz-card">
+          <div class="quiz-tag">Quiz 2</div>
+          <h3>Division with Remainders</h3>
+          <p>Handle polynomial division problems that result in remainders. Express them as fractions. 5 questions.</p>
+          <div class="quiz-footer">
+            <span>5 questions</span>
+            <span class="quiz-arrow">Start →</span>
+          </div>
+        </a>
+        <a href="division-quiz-3.html" class="quiz-card">
+          <div class="quiz-tag">Quiz 3</div>
+          <h3>Division Mastery</h3>
+          <p>Advanced polynomial division with higher degrees and complex expressions. 5 questions.</p>
+          <div class="quiz-footer">
+            <span>5 questions</span>
+            <span class="quiz-arrow">Start →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Complex Roots</h2>
+      <div class="quiz-grid">
+        <a href="complex-quiz-1.html" class="quiz-card">
+          <div class="quiz-tag">Quiz 1</div>
+          <h3>Complex Numbers Basics</h3>
+          <p>Operations with complex numbers and identifying when roots are complex. 5 questions.</p>
+          <div class="quiz-footer">
+            <span>5 questions</span>
+            <span class="quiz-arrow">Start →</span>
+          </div>
+        </a>
+        <a href="complex-quiz-2.html" class="quiz-card">
+          <div class="quiz-tag">Quiz 2</div>
+          <h3>Quadratic Formula & Complex Roots</h3>
+          <p>Using the quadratic formula to find complex roots when the discriminant is negative. 5 questions.</p>
+          <div class="quiz-footer">
+            <span>5 questions</span>
+            <span class="quiz-arrow">Start →</span>
+          </div>
+        </a>
+        <a href="complex-quiz-3.html" class="quiz-card">
+          <div class="quiz-tag">Quiz 3</div>
+          <h3>Complex Roots Mastery</h3>
+          <p>Find all roots (real and complex) of higher-degree polynomials. 5 questions.</p>
+          <div class="quiz-footer">
+            <span>5 questions</span>
+            <span class="quiz-arrow">Start →</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    polynomials quizzes · 6 interactive quizzes · immediate feedback
+  </footer>
+
+</body>
+</html>
